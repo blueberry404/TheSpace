@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_space_logo">
+    <target
+        android:animation="@animator/logo_plus_rotation"
+        android:name="plus1" />
+    <target
+        android:animation="@animator/logo_plus_rotation"
+        android:name="plus2" />
+    <target
+        android:animation="@animator/logo_plus_rotation"
+        android:name="planet" />
+</animated-vector>
