@@ -1,5 +1,7 @@
-package com.blueberry.thespace.ui
+package com.blueberry.thespace.ui.splash
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -21,9 +23,10 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.blueberry.thespace.MainActivity
 import com.blueberry.thespace.R
-import com.blueberry.thespace.ui.ui.theme.TheSpaceTheme
-import com.blueberry.thespace.ui.ui.theme.optienFamily
+import com.blueberry.thespace.ui.theme.TheSpaceTheme
+import com.blueberry.thespace.ui.theme.optienFamily
 import kotlinx.coroutines.delay
 
 class SplashActivity : ComponentActivity() {
@@ -32,7 +35,7 @@ class SplashActivity : ComponentActivity() {
 
         setContent {
             TheSpaceTheme {
-                splashScreen {}
+                splashScreen { launchMainActivity(this) }
             }
         }
     }
@@ -77,6 +80,13 @@ fun splashScreen(onTimeout: () -> Unit) {
         }
     }
 }
+
+private fun launchMainActivity(context: Context) {
+    context.startActivity(createMainActivityIntent(context))
+}
+
+fun createMainActivityIntent(context: Context) =
+    Intent(context, MainActivity::class.java)
 
 @Preview(showBackground = true)
 @Composable
