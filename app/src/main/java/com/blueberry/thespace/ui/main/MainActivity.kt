@@ -44,7 +44,7 @@ enum class MainTabs { HOME, PICTURE, EVENTS }
 @Composable
 fun mainContent(list: List<NavigationItem>, mainViewModel: MainViewModel) {
     var selectedTab by remember { mutableStateOf(MainTabs.HOME) }
-    Surface(color = MaterialTheme.colors.primary) {
+    Surface {
         Scaffold(bottomBar = {
             bottomTabContent(list, selectedTab) { selectedTab = it }
         },
@@ -61,8 +61,10 @@ fun mainContent(list: List<NavigationItem>, mainViewModel: MainViewModel) {
                         fontFamily = optienFamily
                     )
                 }
-            }) {
-            SelectedTabContent(selectedTab, mainViewModel)
+            }) { innerPadding ->
+            Box(modifier = Modifier.padding(0.dp, 0.dp, 0.dp, innerPadding.calculateBottomPadding())) {
+                SelectedTabContent(selectedTab, mainViewModel)
+            }
         }
     }
 }

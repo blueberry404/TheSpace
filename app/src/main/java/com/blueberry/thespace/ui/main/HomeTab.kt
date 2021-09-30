@@ -1,7 +1,7 @@
 package com.blueberry.thespace
 
 import androidx.compose.animation.Crossfade
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,18 +10,24 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.blueberry.thespace.data.HomeExplore
 import com.blueberry.thespace.data.Result
 import com.blueberry.thespace.ui.main.MainViewModel
+import com.skydoves.landscapist.CircularReveal
+import com.skydoves.landscapist.ShimmerParams
+import com.skydoves.landscapist.coil.CoilImage
 
 @Composable
 fun HomeTab(viewModel: MainViewModel, onClick: () -> Unit) {
@@ -64,49 +70,70 @@ private fun homeExploreContainer(list: List<HomeExplore>, onClick: () -> Unit) {
     Row {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
+                .fillMaxSize()
                 .padding(15.dp)
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
+            LazyColumn(
+                contentPadding = PaddingValues(vertical = 8.dp),
+                verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
-                val modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                LazyColumn {
-                    items(list.size) { HomeExploreItem(item = list[it], modifier = modifier, onClick = onClick) }
-                }
+                items(list.size) { HomeExploreItem(item = list[it], onClick = onClick) }
             }
         }
     }
 }
 
 @Composable
-private fun HomeExploreItem(item: HomeExplore, modifier: Modifier, onClick: () -> Unit) {
-    Box(modifier = modifier.padding(top = 5.dp, bottom = 5.dp)) {
-        Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(10.dp)) {
+private fun HomeExploreItem(item: HomeExplore, onClick: () -> Unit) {
+    Card(
+        modifier = Modifier.fillMaxSize(), shape = RoundedCornerShape(15.dp),
+        elevation = 5.dp
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .wrapContentSize(Alignment.Center)
+        ) {
+            CoilImage(
+                imageModel = item.imageURL,
+                // Crop, Fit, Inside, FillHeight, FillWidth, None
+                contentScale = ContentScale.FillBounds,
+                // shows an image with a circular revealed animation.
+                circularReveal = CircularReveal(duration = 200),
+                // shows a placeholder ImageBitmap when loading.
+                // shows a shimmering effect when loading an image.
+                shimmerParams = ShimmerParams(
+                    baseColor = MaterialTheme.colors.background,
+                    highlightColor = colorResource(id = R.color.shimmer_highlight),
+                    durationMillis = 500,
+                    dropOff = 0.65f,
+                    tilt = 20f
+                ),
+                modifier = Modifier.height(250.dp)
+            )
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .wrapContentSize(Alignment.Center)
+                    .height(250.dp)
+                    .background(colorResource(id = R.color.light_black))
+                    .alpha(0.3f)
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)
+                    .align(Alignment.Center),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_planet),
-                    contentDescription = null
+                Text(
+                    text = item.title,
+                    style = MaterialTheme.typography.h5,
+                    color = colorResource(id = R.color.white),
+                    fontFamily = FontFamily.Serif,
+                    textAlign = TextAlign.Center
                 )
-                Text(text = item.title)
             }
         }
-    }
-}
-
-@Preview
-@Composable
-fun previewHomeTab() {
-    HomeTab(MainViewModel()) {
-
     }
 }
