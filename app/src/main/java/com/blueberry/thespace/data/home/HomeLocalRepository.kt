@@ -2,8 +2,11 @@ package com.blueberry.thespace.data.home
 
 import com.blueberry.thespace.data.HomeExplore
 import com.blueberry.thespace.data.NavigationItem
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class HomeLocalRepository {
+@Singleton
+class HomeLocalRepository @Inject constructor() {
 
     fun getTabsList() = listOf(NavigationItem.Home, NavigationItem.PictureOfDay, NavigationItem.Events)
 

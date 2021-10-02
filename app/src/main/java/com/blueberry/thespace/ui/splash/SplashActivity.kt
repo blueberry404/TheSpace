@@ -27,8 +27,10 @@ import com.blueberry.thespace.MainActivity
 import com.blueberry.thespace.R
 import com.blueberry.thespace.ui.theme.TheSpaceTheme
 import com.blueberry.thespace.ui.theme.optienFamily
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 
+@AndroidEntryPoint
 class SplashActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

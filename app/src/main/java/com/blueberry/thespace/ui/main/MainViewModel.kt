@@ -7,11 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.blueberry.thespace.data.HomeExplore
 import com.blueberry.thespace.data.NavigationItem
 import com.blueberry.thespace.data.Result
-import com.blueberry.thespace.data.home.HomeLocalRepository
 import com.blueberry.thespace.data.home.HomeRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MainViewModel: ViewModel() {
-    private val homeRepository = HomeRepository(HomeLocalRepository())
+@HiltViewModel
+class MainViewModel @Inject constructor(homeRepository: HomeRepository): ViewModel() {
 
     private var _tabList = homeRepository.getTabsList().asLiveData()
 

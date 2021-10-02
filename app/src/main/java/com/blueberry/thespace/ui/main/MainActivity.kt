@@ -19,10 +19,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.blueberry.thespace.data.NavigationItem
+import com.blueberry.thespace.data.home.HomeLocalRepository
+import com.blueberry.thespace.data.home.HomeRepository
 import com.blueberry.thespace.ui.main.MainViewModel
 import com.blueberry.thespace.ui.theme.TheSpaceTheme
 import com.blueberry.thespace.ui.theme.optienFamily
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val mainViewModel: MainViewModel by viewModels()
@@ -103,12 +107,4 @@ private fun SelectedTabContent(selectedTab: MainTabs, viewModel: MainViewModel) 
         MainTabs.EVENTS -> EventsTab()
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun mainContentPreview() {
-    var list = listOf(NavigationItem.Home, NavigationItem.PictureOfDay, NavigationItem.Events)
-    mainContent(list, MainViewModel())
-}
-
 
