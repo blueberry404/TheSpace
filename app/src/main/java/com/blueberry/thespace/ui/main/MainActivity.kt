@@ -12,6 +12,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -19,6 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.blueberry.thespace.data.NavigationItem
+import com.blueberry.thespace.data.PictureOfDay
+import com.blueberry.thespace.data.Result
 import com.blueberry.thespace.data.home.HomeLocalRepository
 import com.blueberry.thespace.data.home.HomeRepository
 import com.blueberry.thespace.ui.main.MainViewModel
@@ -61,7 +64,6 @@ fun mainContent(list: List<NavigationItem>, mainViewModel: MainViewModel) {
                     Text(
                         text = stringResource(id = R.string.app_name),
                         style = MaterialTheme.typography.h3,
-                        fontWeight = FontWeight.Bold,
                         fontFamily = optienFamily
                     )
                 }
@@ -99,11 +101,12 @@ fun bottomTabContent(
 
 @Composable
 private fun SelectedTabContent(selectedTab: MainTabs, viewModel: MainViewModel) {
+//    val pictureOfDay: State<Result<PictureOfDay>> = mainViewModel.pictureOfDayResult.collectAsState()
     when (selectedTab) {
         MainTabs.HOME -> HomeTab(viewModel) {
 
         }
-        MainTabs.PICTURE -> PictureOfDayTab()
+        MainTabs.PICTURE -> PictureOfDayTab(viewModel)
         MainTabs.EVENTS -> EventsTab()
     }
 }
