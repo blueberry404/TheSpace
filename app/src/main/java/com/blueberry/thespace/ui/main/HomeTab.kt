@@ -14,14 +14,13 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.blueberry.thespace.data.HomeExplore
 import com.blueberry.thespace.data.Result
 import com.blueberry.thespace.ui.main.MainViewModel
@@ -30,7 +29,7 @@ import com.skydoves.landscapist.ShimmerParams
 import com.skydoves.landscapist.coil.CoilImage
 
 @Composable
-fun HomeTab(viewModel: MainViewModel, onClick: () -> Unit) {
+fun HomeTab(viewModel: MainViewModel = viewModel(), onClick: () -> Unit) {
 
     val uiState =
         viewModel.exploreHomeData.observeAsState(initial = Result.Loading()) //can use produceState also

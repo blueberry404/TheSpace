@@ -8,7 +8,7 @@ import javax.inject.Singleton
 @Singleton
 class HomeLocalRepository @Inject constructor() {
 
-    fun getTabsList() = listOf(NavigationItem.Home, NavigationItem.PictureOfDay, NavigationItem.Events)
+    fun getTabsList() = listOf(NavigationItem.Home, NavigationItem.PictureOfDay)
 
     fun getHomeScreenContent() = listOf(
         HomeExplore("Solar System and Exo Planets", "https://images.yourstory.com/cs/wordpress/2017/12/Exoplanets.png?fm=auto&ar=2:1&mode=crop&crop=faces&w=500"),

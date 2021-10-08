@@ -1,6 +1,5 @@
 package com.blueberry.thespace
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -8,31 +7,26 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.blueberry.thespace.data.PictureOfDay
 import com.blueberry.thespace.data.Result
 import com.blueberry.thespace.ui.main.MainViewModel
 import com.skydoves.landscapist.CircularReveal
 import com.skydoves.landscapist.ShimmerParams
 import com.skydoves.landscapist.coil.CoilImage
-import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
-fun PictureOfDayTab(viewModel: MainViewModel? = null) {
+fun PictureOfDayTab(viewModel: MainViewModel = viewModel()) {
     val scrollState = rememberScrollState()
     val state = viewModel!!.pictureOfDayResult.observeAsState(initial = Result.Loading())
     val result = state.value
